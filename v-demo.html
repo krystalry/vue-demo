@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title></title>
+    <script src="https://cdn.bootcss.com/vue/2.4.0/vue.js"></script>
+</head>
+
+<body>
+<div id="test">
+    <input type="button" value="跑起来" v-on:click="run"/>
+    <input type="button" value="停止" v-on:click="stop"/>
+    <input type="button" value="初始化" v-on:click="reset"/>
+    <p v-text="msg"></p>
+    <p v-html="hello"></p>
+    <p :style="{color:redColor}">{{msg}}</p>
+</div>
+<script>
+    var vm1 = new Vue({
+        el: "#test",
+        data: {
+            msg: " 1 2 3 4 5",
+            msg1: " 1 2 3 4 5",
+            hello: "<span>Hello</span>",
+            redColor: "red",
+            interval: null
+        },
+        methods: {
+            run: function () {
+                if (this.interval != null) return;
+                this.interval = setInterval(function () {
+                    console.log(vm1.msg);
+                    var start = vm1.msg.substring(0, 1);
+                    var end = vm1.msg.substring(1);
+                    vm1.msg = end + start;
+                }, 400);
+            },
+            stop: function () {
+                if (this.interval == null) return;
+                clearInterval(this.interval);
+                this.interval = null;
+            },
+            reset: function () {
+                this.msg = this.msg1;
+            }
+        }
+    });
+</script>
+</body>
+</html>
