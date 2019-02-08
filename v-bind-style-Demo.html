@@ -80,6 +80,49 @@
 <!--</body>-->
 <!--</html>-->
 
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head lang="en">-->
+    <!--<meta charset="UTF-8"/>-->
+    <!--<title></title>-->
+    <!--<script src="https://cdn.bootcss.com/vue/2.4.0/vue.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div id="container" :style="{color:color,fontSize:fontSize+'px'}">-->
+    <!--{{house}}-->
+    <!--&lt;!&ndash; 计算属性 &ndash;&gt;-->
+    <!--<h2 :style="style1">{{house}}</h2>-->
+    <!--&lt;!&ndash; data中的 &ndash;&gt;-->
+    <!--<h3 :style="style">{{house}}</h3>-->
+<!--</div>-->
+<!--<script type="text/javascript">-->
+    <!--var myApp = new Vue({-->
+        <!--el: "#container",-->
+        <!--data: {-->
+            <!--house: "英格里拉大酒店",-->
+            <!--color: "red",-->
+            <!--fontSize: 18,-->
+            <!--style: {-->
+                <!--background: "yellow",-->
+                <!--fontSize: 24 + "px"-->
+            <!--}-->
+        <!--},-->
+        <!--// 计算属性-->
+        <!--computed: {-->
+            <!--style1: function () {-->
+                <!--return {-->
+                    <!--fontSize: this.fontSize + "px",-->
+                    <!--fontWeight: "italic",-->
+                    <!--border: "1px solid #ff0000"-->
+                <!--}-->
+            <!--}-->
+        <!--}-->
+    <!--})-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -88,33 +131,19 @@
     <script src="https://cdn.bootcss.com/vue/2.4.0/vue.js"></script>
 </head>
 <body>
-<div id="container" :style="{color:color,fontSize:fontSize+'px'}">
-    {{house}}
-    <!-- 计算属性 -->
-    <h2 :style="style1">{{house}}</h2>
-    <!-- data中的 -->
-    <h3 :style="style">{{house}}</h3>
+<div id="app">
+    <p :title="time">时间：{{time}}</p>
+    <button @click="suprise">点击</button>
 </div>
-<script type="text/javascript">
-    var myApp = new Vue({
-        el: "#container",
-        data: {
-            house: "英格里拉大酒店",
-            color: "red",
-            fontSize: 18,
-            style: {
-                background: "yellow",
-                fontSize: 24 + "px"
-            }
+<script>
+    new Vue({
+        el: '#app',
+        data:{
+            time: new Date()
         },
-        // 计算属性
-        computed: {
-            style1: function () {
-                return {
-                    fontSize: this.fontSize + "px",
-                    fontWeight: "italic",
-                    border: "1px solid #ff0000"
-                }
+        methods:{
+            suprise(){
+                alert('然而并没有')
             }
         }
     })
