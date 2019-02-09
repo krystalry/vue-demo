@@ -83,41 +83,116 @@
 <!--<!DOCTYPE html>-->
 <!--<html>-->
 <!--<head lang="en">-->
-    <!--<meta charset="UTF-8"/>-->
-    <!--<title></title>-->
-    <!--<script src="https://cdn.bootcss.com/vue/2.4.0/vue.js"></script>-->
+<!--<meta charset="UTF-8"/>-->
+<!--<title></title>-->
+<!--<script src="https://cdn.bootcss.com/vue/2.4.0/vue.js"></script>-->
 <!--</head>-->
 <!--<body>-->
 <!--<div id="container" :style="{color:color,fontSize:fontSize+'px'}">-->
-    <!--{{house}}-->
-    <!--&lt;!&ndash; 计算属性 &ndash;&gt;-->
-    <!--<h2 :style="style1">{{house}}</h2>-->
-    <!--&lt;!&ndash; data中的 &ndash;&gt;-->
-    <!--<h3 :style="style">{{house}}</h3>-->
+<!--{{house}}-->
+<!--&lt;!&ndash; 计算属性 &ndash;&gt;-->
+<!--<h2 :style="style1">{{house}}</h2>-->
+<!--&lt;!&ndash; data中的 &ndash;&gt;-->
+<!--<h3 :style="style">{{house}}</h3>-->
 <!--</div>-->
 <!--<script type="text/javascript">-->
-    <!--var myApp = new Vue({-->
-        <!--el: "#container",-->
-        <!--data: {-->
-            <!--house: "英格里拉大酒店",-->
-            <!--color: "red",-->
-            <!--fontSize: 18,-->
-            <!--style: {-->
-                <!--background: "yellow",-->
-                <!--fontSize: 24 + "px"-->
-            <!--}-->
-        <!--},-->
-        <!--// 计算属性-->
-        <!--computed: {-->
-            <!--style1: function () {-->
-                <!--return {-->
-                    <!--fontSize: this.fontSize + "px",-->
-                    <!--fontWeight: "italic",-->
-                    <!--border: "1px solid #ff0000"-->
-                <!--}-->
-            <!--}-->
-        <!--}-->
-    <!--})-->
+<!--var myApp = new Vue({-->
+<!--el: "#container",-->
+<!--data: {-->
+<!--house: "英格里拉大酒店",-->
+<!--color: "red",-->
+<!--fontSize: 18,-->
+<!--style: {-->
+<!--background: "yellow",-->
+<!--fontSize: 24 + "px"-->
+<!--}-->
+<!--},-->
+<!--// 计算属性-->
+<!--computed: {-->
+<!--style1: function () {-->
+<!--return {-->
+<!--fontSize: this.fontSize + "px",-->
+<!--fontWeight: "italic",-->
+<!--border: "1px solid #ff0000"-->
+<!--}-->
+<!--}-->
+<!--}-->
+<!--})-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head lang="en">-->
+<!--<meta charset="UTF-8"/>-->
+<!--<title></title>-->
+<!--<script src="https://cdn.bootcss.com/vue/2.4.0/vue.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div id="app">-->
+<!--<p :title="time">时间：{{time}}</p>-->
+<!--<button @click="suprise">点击</button>-->
+<!--</div>-->
+<!--<script>-->
+<!--new Vue({-->
+<!--el: '#app',-->
+<!--data:{-->
+<!--time: new Date()-->
+<!--},-->
+<!--methods:{-->
+<!--suprise(){-->
+<!--alert('然而并没有')-->
+<!--}-->
+<!--}-->
+<!--})-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head lang="en">-->
+<!--<meta charset="UTF-8"/>-->
+<!--<title></title>-->
+<!--<script src="https://cdn.bootcss.com/vue/2.4.0/vue.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div id="app2">-->
+<!--{{fruit}}&lt;!&ndash; 观测数据变化 &ndash;&gt;-->
+<!--<my-checkbox v-model="fruit.apple" value="apple"></my-checkbox>&lt;!&ndash; 下行注释的语法糖 &ndash;&gt;-->
+<!--&lt;!&ndash; <my-checkbox :checked="fruit.apple" @change="val => {fruit.apple = val}" value="apple"></my-checkbox> &ndash;&gt;-->
+
+<!--<my-checkbox v-model="fruit.peach" value="peach"></my-checkbox>&lt;!&ndash; 下行注释的语法糖 &ndash;&gt;-->
+<!--&lt;!&ndash; <my-checkbox :checked="fruit.peach" @change="val => {fruit.peach = val}" value="peach"></my-checkbox> &ndash;&gt;-->
+<!--</div>-->
+<!--<script>-->
+<!--Vue.component('my-checkbox', {-->
+<!--template: '<div><span>{{value}}</span><input type="checkbox" :checked="checked" @change="doThis" :value="value"/></div>',-->
+<!--model: {-->
+<!--prop: 'checked',-->
+<!--event: 'change'-->
+<!--},-->
+<!--props: {-->
+<!--checked: Boolean,-->
+<!--value: String-->
+<!--},-->
+<!--methods: {-->
+<!--doThis() {-->
+<!--this.$emit('change', !this.checked);-->
+<!--}-->
+<!--}-->
+<!--});-->
+<!--new Vue({-->
+<!--el: '#app2',-->
+<!--data: {-->
+<!--fruit: {//数据-->
+<!--apple: true,-->
+<!--peach: false-->
+<!--}-->
+<!--}-->
+<!--});-->
 <!--</script>-->
 <!--</body>-->
 <!--</html>-->
@@ -132,21 +207,37 @@
 </head>
 <body>
 <div id="app">
-    <p :title="time">时间：{{time}}</p>
-    <button @click="suprise">点击</button>
+    {{fruit}}<!-- 观测数据变化 -->
+    <my-radio v-model="fruit" value="apple" name="myFruit"></my-radio><!-- 下行注释的语法糖 -->
+    <!-- <my-radio :checked="fruit" @change="val => {fruit = val}" value="apple"></my-radio> -->
+
+    <my-radio v-model="fruit" value="peach" name="myFruit"></my-radio><!-- 下行注释的语法糖 -->
+    <!-- <my-radio :checked="fruit" @change="val => {fruit = val}" value="peach"></my-radio> -->
 </div>
 <script>
-    new Vue({
-        el: '#app',
-        data:{
-            time: new Date()
+    Vue.component('my-radio', {
+        template: '<div><span>{{value}}</span><input :name="name" type="radio" ref="radio" :checked="checked===value" @change="doThis" :value="value"/></div>',
+        model: {
+            prop: 'checked',
+            event: 'change'
         },
-        methods:{
-            suprise(){
-                alert('然而并没有')
+        props: {
+            checked: String,
+            value: String,
+            name: String
+        },
+        methods: {
+            doThis() {
+                this.$emit('change', this.$refs.radio.value);
             }
         }
-    })
+    });
+    new Vue({
+        el: '#app',
+        data: {
+            fruit: 'peach'//数据
+        }
+    });
 </script>
 </body>
 </html>
