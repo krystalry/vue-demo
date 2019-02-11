@@ -198,6 +198,200 @@
 <!--</html>-->
 
 
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head lang="en">-->
+<!--<meta charset="UTF-8"/>-->
+<!--<title></title>-->
+<!--<script src="https://cdn.bootcss.com/vue/2.4.0/vue.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div id="app">-->
+<!--{{fruit}}&lt;!&ndash; 观测数据变化 &ndash;&gt;-->
+<!--<my-radio v-model="fruit" value="apple" name="myFruit"></my-radio>&lt;!&ndash; 下行注释的语法糖 &ndash;&gt;-->
+<!--&lt;!&ndash; <my-radio :checked="fruit" @change="val => {fruit = val}" value="apple"></my-radio> &ndash;&gt;-->
+
+<!--<my-radio v-model="fruit" value="peach" name="myFruit"></my-radio>&lt;!&ndash; 下行注释的语法糖 &ndash;&gt;-->
+<!--&lt;!&ndash; <my-radio :checked="fruit" @change="val => {fruit = val}" value="peach"></my-radio> &ndash;&gt;-->
+<!--</div>-->
+<!--<script>-->
+<!--Vue.component('my-radio', {-->
+<!--template: '<div><span>{{value}}</span><input :name="name" type="radio" ref="radio" :checked="checked===value" @change="doThis" :value="value"/></div>',-->
+<!--model: {-->
+<!--prop: 'checked',-->
+<!--event: 'change'-->
+<!--},-->
+<!--props: {-->
+<!--checked: String,-->
+<!--value: String,-->
+<!--name: String-->
+<!--},-->
+<!--methods: {-->
+<!--doThis() {-->
+<!--this.$emit('change', this.$refs.radio.value);-->
+<!--}-->
+<!--}-->
+<!--});-->
+<!--new Vue({-->
+<!--el: '#app',-->
+<!--data: {-->
+<!--fruit: 'peach'//数据-->
+<!--}-->
+<!--});-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head lang="en">-->
+    <!--<meta charset="UTF-8"/>-->
+    <!--<title></title>-->
+    <!--<script src="https://cdn.bootcss.com/vue/2.4.0/vue.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--一：全局注册组件-->
+<!--<div id="app1">-->
+    <!--<tag></tag>-->
+<!--</div>-->
+<!--<script>-->
+    <!--Vue.component('tag', {-->
+        <!--template: `<div>全局注册组件<div>`-->
+    <!--});-->
+    <!--new Vue({-->
+        <!--el: "#app1"-->
+    <!--});-->
+<!--</script>-->
+<!--~~~~~~~~~~~~~~~~~~~-->
+<!--<br>-->
+<!--二：局部注册组件-->
+<!--<div id="app2">-->
+    <!--<tag></tag>-->
+<!--</div>-->
+<!--<script>-->
+    <!--var tag = {-->
+        <!--template: `<div>局部注册组件<div>`-->
+    <!--};-->
+    <!--new Vue({-->
+        <!--el: "#app2",-->
+        <!--components: {tag}-->
+    <!--});-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head lang="en">-->
+    <!--<meta charset="UTF-8"/>-->
+    <!--<title></title>-->
+    <!--<script src="https://cdn.bootcss.com/vue/2.4.0/vue.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div id="app">-->
+    <!--<app-component msg="我是父组件传递的数据"></app-component>-->
+    <!--<hr>-->
+    <!--<p>需求： 通过input中输入的数据改变div的宽度</p>-->
+    <!--&lt;!&ndash; 此时传递的width仅仅是一个数据，我们此时采用计算属性 &ndash;&gt;-->
+    <!--<input type="text" v-model="width">-->
+    <!--<width-component :width="width"></width-component>&lt;!&ndash; 此处width对应是`v-model="width"` &ndash;&gt;-->
+<!--</div>-->
+<!--<script>-->
+    <!--var app = new Vue({-->
+        <!--el:'#app',-->
+        <!--data:{-->
+            <!--width:'1'-->
+        <!--},-->
+        <!--components:{-->
+            <!--'app-component':{-->
+                <!--props:['msg'],-->
+                <!--template: '<div class="jubu">{{count}}</div>',-->
+                <!--data: function(){-->
+                    <!--return{-->
+                        <!--count:this.msg//props中的值可以通过this.xxx来获取-->
+                    <!--}-->
+                <!--}-->
+            <!--},-->
+            <!--'width-component':{-->
+                <!--props:['width'],-->
+                <!--template: '<div :style="style"></div>',-->
+                <!--computed:{-->
+                    <!--style:function(){-->
+                        <!--//此时return的是style-->
+                        <!--return{-->
+                            <!--width: this.width +'px',-->
+                            <!--background: 'rgb(228, 100, 26)',-->
+                            <!--height:'30px',-->
+                            <!--marginTop: '10px'-->
+                        <!--}-->
+                    <!--}-->
+                <!--},-->
+                <!--data: function(){-->
+                    <!--return {}-->
+                <!--}-->
+            <!--}-->
+        <!--}-->
+    <!--})-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head lang="en">-->
+    <!--<meta charset="UTF-8"/>-->
+    <!--<title></title>-->
+    <!--<script src="https://cdn.bootcss.com/vue/2.4.0/vue.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div id="app">-->
+    <!--<app-component msg="我是父组件传递的数据"></app-component>-->
+    <!--<hr>-->
+    <!--<p>需求： 通过input中输入的数据改变div的宽度</p>-->
+    <!--&lt;!&ndash; 此时传递的width仅仅是一个数据，我们此时采用计算属性 &ndash;&gt;-->
+    <!--<input type="text" v-model="width">-->
+    <!--<width-component :width="width"></width-component>&lt;!&ndash; 此处width对应是`v-model="width"` &ndash;&gt;-->
+<!--</div>-->
+<!--<script>-->
+    <!--var app = new Vue({-->
+        <!--el:'#app',-->
+        <!--data:{-->
+            <!--width:'1'-->
+        <!--},-->
+        <!--components:{-->
+            <!--'app-component':{-->
+                <!--props:['msg'],-->
+                <!--template: '<div class="jubu">{{count}}</div>',-->
+                <!--data: function(){-->
+                    <!--return{-->
+                        <!--count:this.msg//props中的值可以通过this.xxx来获取-->
+                    <!--}-->
+                <!--}-->
+            <!--},-->
+            <!--'width-component':{-->
+                <!--props:['width'],-->
+                <!--template: '<div :style="style"></div>',-->
+                <!--computed:{-->
+                    <!--style:function(){-->
+                        <!--//此时return的是style-->
+                        <!--return{-->
+                            <!--width: this.width +'px',-->
+                            <!--background: 'rgb(228, 100, 26)',-->
+                            <!--height:'30px',-->
+                            <!--marginTop: '10px'-->
+                        <!--}-->
+                    <!--}-->
+                <!--},-->
+                <!--data: function(){-->
+                    <!--return {}-->
+                <!--}-->
+            <!--}-->
+        <!--}-->
+    <!--})-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -206,38 +400,79 @@
     <script src="https://cdn.bootcss.com/vue/2.4.0/vue.js"></script>
 </head>
 <body>
-<div id="app">
-    {{fruit}}<!-- 观测数据变化 -->
-    <my-radio v-model="fruit" value="apple" name="myFruit"></my-radio><!-- 下行注释的语法糖 -->
-    <!-- <my-radio :checked="fruit" @change="val => {fruit = val}" value="apple"></my-radio> -->
-
-    <my-radio v-model="fruit" value="peach" name="myFruit"></my-radio><!-- 下行注释的语法糖 -->
-    <!-- <my-radio :checked="fruit" @change="val => {fruit = val}" value="peach"></my-radio> -->
+<div id="app" >
+    <my-acomponent ref="a"></my-acomponent>
+    <my-bcomponent ref="b"></my-bcomponent>
+    <hr>
+    <child-component  ref="c"></child-component>---{{msg}}
+    <br>
+    <button @click="getChildData">我是父组件的按钮，我要拿到子组件的内容</button>
+    ----------------{{formchild}}
 </div>
+
 <script>
-    Vue.component('my-radio', {
-        template: '<div><span>{{value}}</span><input :name="name" type="radio" ref="radio" :checked="checked===value" @change="doThis" :value="value"/></div>',
-        model: {
-            prop: 'checked',
-            event: 'change'
+
+    Vue.component('my-acomponent',{
+        template:'<div><button @click="handle">点击我向B组件传递数据</button></div>',
+        data:function () {
+            return{
+                aaa:'我是来自A组件的内容',
+                msg:'我是A中的msg'
+            }
         },
-        props: {
-            checked: String,
-            value: String,
-            name: String
-        },
-        methods: {
-            doThis() {
-                this.$emit('change', this.$refs.radio.value);
+        methods:{
+            handle:function () {
+                this.$root.bus.$emit('lala',this.aaa);
             }
         }
-    });
-    new Vue({
-        el: '#app',
-        data: {
-            fruit: 'peach'//数据
+    })
+    Vue.component('my-bcomponent',{
+        template:'<div></div>',
+        data:function(){
+            return {
+                msg:'我是B中的msg'
+            }
+        },
+        created:function () {
+            //A组件在实例创建的时候就监听事件---lala事件
+            this.$root.bus.$on('lala',function (value) {
+                alert(value)
+            });
         }
-    });
+    })
+    Vue.component('child-component',{
+        data:function(){
+            return {
+                msg:'我是C中的msg'
+            }
+        },
+        template:'<button @click="setFatherData">通过点击我修改父亲的数据</button>',
+        methods:{
+            setFatherData:function () {
+                this.$parent.msg = '数据已经修改了'
+            }
+        }
+    })
+    var app = new Vue({
+        el:'#app',
+        data:{
+            //bus中介
+            bus:new Vue(),
+            msg:'数据还未修改',
+            formchild:'还未拿到'
+        },
+        methods:{
+            getChildData:function () {
+                //用来拿子组件中的内容  ----   $refs
+                this.formchild = this.$refs.c.msg;
+            }
+        }
+    })
 </script>
 </body>
 </html>
+
+
+
+
+
